@@ -1,6 +1,7 @@
 // Raytracing.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
+#include "color.h"
+#include "vec3.h"
 #include <iostream>
 
 int main()
@@ -16,6 +17,7 @@ int main()
 
 
     for (int j = image_height - 1; j >= 0; j--) {
+        std::cerr << "\rScanlines remaining: " << j << ' ' << std::flush;
         for (int i = 0; i < image_width; i++) {
             auto r = double(i) / (image_width - 1);
             auto g = double(j) / (image_height - 1);
@@ -28,6 +30,9 @@ int main()
             std::cout << ir << ' ' << ig << ' ' << ib << "\n";
         }
     }
+
+    std::cerr << "\nDone.\n";
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
