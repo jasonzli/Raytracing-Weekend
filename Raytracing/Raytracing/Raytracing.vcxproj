@@ -139,10 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Raytracing.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="color.h" />
+    <ClInclude Include="camera.h" />
     <ClInclude Include="rtweekend.h" />
     <ClInclude Include="hittable_list.h" />
     <ClInclude Include="hittable.h" />
