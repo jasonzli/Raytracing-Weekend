@@ -5,23 +5,24 @@
 
 #include "camera.h"
 #include "color.h"
-#include "material.h"
 #include "hittable_list.h"
+#include "material.h"
 #include "sphere.h"
 #include <iostream>
 
 //create a ray color function that evaluates a background
 color ray_color(const ray& r, const hittable& world, int depth) {
+    
     hit_record rec;
 
     //if we've exceeded teh ray bounce limit, no more lighti s gathered.
-
     if (depth <= 0)
         return color(0, 0, 0);
+
     if (world.hit(r, 0.001, infinity, rec)) {
         ray scattered;
         color attenuation;
-        if (rec.mat_ptr->scatter(r, rec, attenuation, scattered))
+        if ( rec.mat_ptr->scatter(r, rec, attenuation, scattered))
             return attenuation * ray_color(scattered, world, depth - 1);
         return color(0, 0, 0);
 
