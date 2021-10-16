@@ -8,6 +8,9 @@
 //sphere hits
 //solved by finding the roots of a quadratic equation
 //one root for glancing, two roots for going through, imaginary roots for no intersection
+//the equation to find the ray sphere intersection is (P-C) * (P-C) = r^2
+//expanded into the (P(t) - C) * (P(t) - C) = r^2
+//and then further because P(t) = A + t*b; where A is origin and b is direction
 double hit_sphere(const point3& center, double radius, const ray& r) {
     vec3 oc = r.origin() - center;
     auto a = dot(r.direction(), r.direction());
@@ -27,7 +30,7 @@ double hit_sphere(const point3& center, double radius, const ray& r) {
 color ray_color(const ray& r) {
     auto t = hit_sphere(point3(0, 0, -1), 0.5, r);
     if (t > 0.0) {
-        vec3 N = unit_vector(r.at(t) - vec3(0, 0, -1));
+        vec3 N = unit_vector(r.at(t) - vec3(0, 0, -1));//compute normal direction toward center of sphere
         return 0.5 * color(N.x() + 1, N.y() + 1, N.z() + 1);
     }
 
@@ -40,7 +43,7 @@ int main()
 {
     // Image
     const auto aspect_ratio = 16.0 / 9.0;
-    const int image_width = 400;
+    const int image_width = 1600;
     const int image_height = static_cast<int>(image_width / aspect_ratio);
 
     // Camera
